@@ -15,28 +15,45 @@ TABINV = "tabinv.txt"
 
 #print(json.dumps(result))
 
-def get_config():
+def get_groups():
   if not os.path.isfile(os.path.expanduser(TABINV)):
     return {}
   groups = {}
   with open(os.path.expanduser(TABINV)) as f:
+
     for line in f:
-      l = line.split()
-      host = l.pop(0)
-      l.insert(0, "all")
-      for group in l:
+    line = (line.split("#")[0])   # strip comments
+    fields = line.split()
+    
+    if len(fields) == 0:
+        # skip blank lines
+        continue
+    
+      host = fields.pop(0)
+      fields.insert(0, "all")
+      for group in fields:
         if group not in groups:
-          groups[group] = set(host)
+            new_set = set()
+            new_set.add(host)
+            groups[group] = new_set
         else:
           groups[group].add(host)
   # convert sets to lists
   for g in groups:
     groups[g] = list(groups[g])
+    groups[g] = {
+      'hosts': list(groups[g]),
+      'vars': {
+        'ansible_connection': 'jssh',
+        'ansible_python_interpreter': '/opt/bin/python',
+      }
+    }
+
   return groups
 
 
 def print_list():
-  cfg = get_config()
+  cfg = get_groups()
   print(json.dumps(cfg))
 
 
