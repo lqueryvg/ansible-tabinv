@@ -1,3 +1,5 @@
-a g1 g3
-b g1 g2
-c g2 g3
+host1 live web    # comment
+host3 live app
+# comment followed by blank line
+
+host2 dev  web    # comment

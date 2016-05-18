@@ -1,19 +1,21 @@
 #!/usr/bin/env python
 
+TABINV = "tabinv.txt"
+#VARS = {
+#  'ansible_connection': 'jssh',
+#  'ansible_python_interpreter': '/opt/bin/python',
+#}
+VARS = {}
+
 import argparse
 import sys
 import os
-#import sets
 
 try:
     import json
 except:
     import simplejson as json
 
-#result = {}
-TABINV = "tabinv.txt"
-
-#print(json.dumps(result))
 
 def get_groups():
   if not os.path.isfile(os.path.expanduser(TABINV)):
@@ -22,15 +24,15 @@ def get_groups():
   with open(os.path.expanduser(TABINV)) as f:
 
     for line in f:
-    line = (line.split("#")[0])   # strip comments
-    fields = line.split()
+      line = (line.split("#")[0])   # strip comments
+      fields = line.split()
     
-    if len(fields) == 0:
-        # skip blank lines
-        continue
+      if len(fields) == 0:
+          # skip blank lines
+          continue
     
       host = fields.pop(0)
-      fields.insert(0, "all")
+      fields.insert(0, "all")   # TODO maybe Ansible does this for me ?
       for group in fields:
         if group not in groups:
             new_set = set()
@@ -38,15 +40,12 @@ def get_groups():
             groups[group] = new_set
         else:
           groups[group].add(host)
-  # convert sets to lists
+  # convert sets to lists, otherwise json.dumps() gets angry
   for g in groups:
     groups[g] = list(groups[g])
     groups[g] = {
       'hosts': list(groups[g]),
-      'vars': {
-        'ansible_connection': 'jssh',
-        'ansible_python_interpreter': '/opt/bin/python',
-      }
+      'vars': VARS
     }
 
   return groups
@@ -54,12 +53,11 @@ def get_groups():
 
 def print_list():
   cfg = get_groups()
-  print(json.dumps(cfg))
+  print(json.dumps(cfg, indent=1))
 
 
 def print_host(host):
-  # TODO
-  return
+  print(json.dumps({'_meta': {'hostvars': {}}}, indent=1))
 
 
 def get_args(args_list):
