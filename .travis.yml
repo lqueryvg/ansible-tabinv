@@ -7,3 +7,4 @@ script: tests/runtests
 notifications:
   email:
     on_success: never
+
