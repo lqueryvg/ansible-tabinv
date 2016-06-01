@@ -12,7 +12,7 @@ except:
     import simplejson as json
 
 
-def get_groups():
+def get_group_hosts():
   if not os.path.isfile(os.path.expanduser(TABINV)):
     return {}
   group_hosts = {}
