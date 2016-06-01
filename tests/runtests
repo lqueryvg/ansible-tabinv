@@ -1,0 +1,30 @@
+#!/bin/bash
+
+cd tests
+
+test_usage() {
+  m="tabinv.py: error: one of the arguments --list --host is required"
+  output=`../tabinv.py 2>&1 | grep "$m"`
+  assertEquals "$m" "$output"
+  [[ $? == 1 ]] && exitStatus=1
+}
+
+test_host1_count_is_3() {
+  count=`../tabinv.py --list | grep host1 | wc -l`
+  assertEquals 3 "$count"
+  [[ $? == 1 ]] && exitStatus=1
+}
+
+test_host_argument() {
+  count=`../tabinv.py --host anything| grep _meta | wc -l`
+  assertEquals 1 "$count"
+  [[ $? == 1 ]] && exitStatus=1
+}
+
+shunit=/tmp/shunit2-2.0.3/src/shell/shunit2
+[[ -r $shunit ]] || exit 1
+
+. $shunit
+
+exit $exitStatus
+
