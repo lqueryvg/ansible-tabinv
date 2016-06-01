@@ -15,15 +15,31 @@ Horizontally group your Ansible hosts.
 
 ## Example:
 
-With the following `tabinv.txt` input:
+The following `tabinv.txt` file
 
 ```
-host1 live web    # comment
+host1 live web
 host3 live app
-# comment followed by blank line
-
-host2 dev  web    # comment
+host2 dev  web
 ```
+
+is equivalent to this:
+```
+[web]
+host1
+host2
+
+[live]
+host1
+host3
+
+[dev]
+host2
+```
+
+Which do you think is more readable and manageable ?
+
+## Output:
 
 `tabinv.py --list` produces the following:
 ```
@@ -75,3 +91,9 @@ host2 dev  web    # comment
 }
 ```
 
+## Big Tip
+Instead of pointing Ansible at a single inventory file or script (with `-i`)
+you can point at a directory. Thus you could combine `tabinv` with files
+containing specific host or group var settings. For example, in the above
+example you could specify different connection types for the groups
+"live" and "dev".
