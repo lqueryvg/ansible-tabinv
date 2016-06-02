@@ -6,6 +6,7 @@ before_script:
 script:
   - pwd
   - ls
+  - ls /bin/bash
   - ./tests/runtests
 notifications:
   email:
