@@ -1,4 +1,4 @@
-# tabinv
+# tabinv.py
 
 [![Build Status](https://travis-ci.org/lqueryvg/ansible-tabinv.svg?branch=master)](https://travis-ci.org/lqueryvg/ansible-tabinv)
 
