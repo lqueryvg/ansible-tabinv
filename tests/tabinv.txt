@@ -1,5 +1,5 @@
+# comment
+
 host1 live web    # comment
 host3 live app
-# comment followed by blank line
-
 host2 dev  web    # comment

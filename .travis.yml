@@ -2,12 +2,9 @@ language: python
 sudo: required
 before_script:
   - curl -L "http://downloads.sourceforge.net/shunit2/shunit2-2.0.3.tgz" | tar zx -C /tmp
-    #  - apt-get install -y python
 script:
-  - pwd
-  - ls
-  - ls /bin/bash
-  - ./tests/runtests
+  - cd ./tests
+  - ./runtests
 notifications:
   email:
     on_success: never

@@ -3,7 +3,7 @@
 Horizontally group your Ansible hosts.
 
 - dynamic inventory script
-- reads hosts from `tabinv.txt` in the current directory
+- reads hosts from `tabinv.txt` in the same directory as tabinv.py
 - one host per line
 - first field is a host
 - subsequent fields are groups which the host belongs to
@@ -95,5 +95,4 @@ Which do you think is more readable and manageable ?
 Instead of pointing Ansible at a single inventory file or script (with `-i`)
 you can point at a directory. Thus you could combine `tabinv` with files
 containing specific host or group var settings. For example, in the above
-example you could specify different connection types for the groups
-"live" and "dev".
+example you could specify a different connection type for the "live" group.
