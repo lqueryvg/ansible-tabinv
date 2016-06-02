@@ -3,7 +3,7 @@ sudo: required
 before_script:
   - curl -L "http://downloads.sourceforge.net/shunit2/shunit2-2.0.3.tgz" | tar zx -C /tmp
     #  - apt-get install -y python
-script: tests/runtests
+script: ./tests/runtests
 notifications:
   email:
     on_success: never
