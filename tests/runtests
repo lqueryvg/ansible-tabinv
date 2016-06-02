@@ -7,9 +7,15 @@ test_usage() {
   [[ $? == 1 ]] && exitStatus=1
 }
 
-test_host1_count_is_3() {
-  count=`./tabinv.py --list | grep host1 | wc -l`
-  assertEquals 3 "$count"
+test_expect_5_groups() {
+  count=`./tabinv.py --list | grep hosts | wc -l`
+  assertEquals 5 "$count"
+  [[ $? == 1 ]] && exitStatus=1
+}
+
+test_expect_9_hosts() {
+  count=`./tabinv.py --list | grep '^   "host' | wc -l`
+  assertEquals 9 "$count"
   [[ $? == 1 ]] && exitStatus=1
 }
 

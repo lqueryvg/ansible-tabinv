@@ -51,43 +51,40 @@ Which do you think is more readable and manageable ?
 {
  "web": {
   "hosts": [
-   "host2", 
-   "host1"
-  ], 
-  "vars": {}
+   "host1", 
+   "host2"
+  ]
  }, 
  "all": {
   "hosts": [
-   "host3", 
+   "host1", 
    "host2", 
-   "host1"
-  ], 
-  "vars": {}
+   "host3"
+  ]
+ }, 
+ "_meta": {
+  "hostvars": {}
  }, 
  "app": {
   "hosts": [
    "host3"
-  ], 
-  "vars": {}
- }, 
- "live": {
-  "hosts": [
-   "host3", 
-   "host1"
-  ], 
-  "vars": {}
+  ]
  }, 
  "dev": {
   "hosts": [
    "host2"
-  ], 
-  "vars": {}
+  ]
+ }, 
+ "live": {
+  "hosts": [
+   "host1", 
+   "host3"
+  ]
  }
 }
 ```
 
 `tabinv.py --host {string}` always produces empty `_meta` output:
-
 ```
 {
  "_meta": {
