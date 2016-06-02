@@ -21,22 +21,25 @@ The following `tabinv.txt` file
 
 ```
 host1 live web
-host3 live app
 host2 dev  web
+host3 live app
 ```
 
 is equivalent to this:
 ```
-[web]
-host1
-host2
-
 [live]
 host1
 host3
 
+[web]
+host1
+host2
+
 [dev]
 host2
+
+[app]
+host3
 ```
 
 Which do you think is more readable and manageable ?
