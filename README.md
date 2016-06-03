@@ -5,15 +5,14 @@
 Horizontally group your Ansible hosts.
 
 - dynamic inventory script
-- reads hosts from `tabinv.txt` in the same directory as tabinv.py
+- reads hosts from `tabinv.txt`
 - one host per line
-- first field is a host
-- subsequent fields are groups which the host belongs to
+- first field is the host name
+- subsequent fields specify groups which the host belongs to
 - fields are separated by whitespace
 - comment char is `#`
 - blank lines are allowed
-- the `VARS` variable inside the script can be edited to add the
-  same vars to every group
+- `tabinv.txt` is expected to be found in the same directory as `tabinv.py`
 
 ## Example:
 
@@ -93,8 +92,19 @@ Which do you think is more readable and manageable ?
 }
 ```
 
-## Big Tip
-Instead of pointing Ansible at a single inventory file or script (with `-i`)
-you can point at a directory. Thus you could combine `tabinv` with files
-containing specific host or group var settings. For example, in the above
-example you could specify a different connection type for the "live" group.
+## Using `tabinv.py` from an inventory directory
+
+Instead of specifying a single inventory file or script with the `ansible -i`
+you can point it at a directory, in which it will discover inventory files and scripts.
+If you want `tabinv.py` to live in such a directory, 
+note that `tabinv.txt` must go in the same directory and you
+you must tell Ansible to ignore this file. One way to do this would be
+to put the the following in `~/.ansible.cfg`:
+
+```
+inventory_ignore_extensions = .txt
+```
+
+## Host and group variables
+
+The `tabinv.txt` format does not support host and group variables, but this problem is easily overcome by using `host_vars` and `group_vars` directories in your playbook directory or your global inventory path (e.g. `/etc/ansible`). See http://docs.ansible.com/ansible/intro_inventory.html.
