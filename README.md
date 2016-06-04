@@ -94,11 +94,13 @@ Which do you think is more readable and manageable ?
 
 ## Using `tabinv.py` from an inventory directory
 
-Instead of specifying a single inventory file or script with `ansible -i`
-you can point it at a directory, where it will discover inventory files and scripts.
-If you want `tabinv.py` to live in such a directory, 
-note that `tabinv.txt` must go in the same directory and you
-must therefore tell Ansible to ignore this file. One way to do this would be
+Rather than specifying a single inventory file or script with the `-i` flag of the Ansible command line tools,
+you are allowed to specify a directory, where Ansible will discover multiple inventory files and scripts and merges the
+results together.
+
+If you want `tabinv.py` to live in such a directory, note that:
+1. `tabinv.txt` must live in the same directory as `tabinv.py`
+2. you must tell Ansible to ignore `tabinv.txt` because it it not a standard inventory file format. One way to do this would be
 to put the the following in `~/.ansible.cfg`:
 
 ```
